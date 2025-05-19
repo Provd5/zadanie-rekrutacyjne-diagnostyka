@@ -10,13 +10,18 @@ class AppLayout extends Component
 {
     public string $title;
 
-    public function __construct(string $title = 'Strona Główna')
+    /**
+     * @param string $title Optional page title
+     */
+    public function __construct(string $title = '')
     {
         $this->title = $title;
     }
 
     /**
      * Get the view / contents that represent the component.
+     *
+     * @return View|Closure|string
      */
     public function render(): View|Closure|string
     {

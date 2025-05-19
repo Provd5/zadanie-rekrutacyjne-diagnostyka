@@ -14,7 +14,7 @@ class DynamicFormComponentTest extends TestCase
             ['type' => 'textarea', 'name' => 'description', 'required' => false, 'label' => 'Opis', 'class' => 'my-description'],
         ];
 
-        $action = route("dynamic-form.store");
+        $action = route("user-data-form.store");
 
         $rendered = $this->blade('<x-dynamic-form :$action :$fields />', [
             'fields' => $fields,

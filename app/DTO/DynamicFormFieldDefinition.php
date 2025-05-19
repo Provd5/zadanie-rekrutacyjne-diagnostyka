@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class FieldDefinition
+class DynamicFormFieldDefinition
 {
     public string $label;
     public string $type;
@@ -11,7 +11,7 @@ class FieldDefinition
     public string $class;
 
     /**
-     * FieldDefinition constructor.
+     * DynamicFormFieldDefinition constructor.
      *
      * @param string $label    The label for the field.
      * @param string $type     The input type.
@@ -34,7 +34,7 @@ class FieldDefinition
     }
 
     /**
-     * Create a new FieldDefinition instance from an associative array.
+     * Create a new DynamicFormFieldDefinition instance from an associative array.
      *
      * @param array $data
      * @return self

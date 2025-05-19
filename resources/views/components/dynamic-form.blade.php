@@ -1,6 +1,6 @@
 @props([
     /**
-     * @var FieldDefinition[] $fields
+     * @var array<DynamicFormFieldDefinition> $fields
      * @var string $action
      */
     "fields",

@@ -14,8 +14,9 @@
         @vite(["resources/css/app.css", "resources/js/app.js"])
     @endif
 
-    <title>{{ $title }} | {{ config("app.name", "Zadanie rekrutacyjne") }}</title>
+    <title>{{ $title ? $title . " | " : "" }}{{ config("app.name", "Zadanie rekrutacyjne") }}</title>
 </head>
+
 
 <body class="flex min-h-screen">
     {{ $slot }}

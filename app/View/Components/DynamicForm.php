@@ -2,46 +2,33 @@
 
 namespace App\View\Components;
 
-use App\DTO\FieldDefinition;
+use App\DTO\DynamicFormFieldDefinition;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Closure;
 
 class DynamicForm extends Component
 {
-    /**
-     * The form action URL.
-     *
-     * @var string
-     */
     public string $action;
-
-    /**
-     * The array of form fields.
-     *
-     * @var FieldDefinition[]
-     */
     public array $fields;
 
     /**
-     * Create a new component instance.
-     *
      * @param string $action The URL where the form should be submitted.
-     * @param FieldDefinition[]|array[] $fields Array of field definitions or raw field arrays.
+     * @param array<DynamicFormFieldDefinition>|array $fields Array of field definitions or raw field arrays.
      */
     public function __construct(string $action, array $fields)
     {
         $this->action = $action;
 
         $this->fields = array_map(function ($field) {
-            return $field instanceof FieldDefinition
+            return $field instanceof DynamicFormFieldDefinition
                 ? $field
-                : FieldDefinition::fromArray($field);
+                : DynamicFormFieldDefinition::fromArray($field);
         }, $fields);
     }
 
     /**
-     * View that represents the component.
+     * Get the view / contents that represent the component.
      *
      * @return View|Closure|string
      */

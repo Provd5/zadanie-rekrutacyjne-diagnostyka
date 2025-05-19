@@ -8,7 +8,7 @@ class DynamicFormTest extends TestCase
 {
     public function test_form_submit_with_valid_data()
     {
-        $response = $this->post(route("dynamic-form.store"), [
+        $response = $this->post(route("user-data-form.store"), [
             'name' => 'Jan Kowalski',
             'email' => 'jan@example.com',
             'description' => 'Opis opcjonalny',
@@ -22,7 +22,7 @@ class DynamicFormTest extends TestCase
 
     public function test_validation_errors_for_invalid_data()
     {
-        $response = $this->post(route("dynamic-form.store"), [
+        $response = $this->post(route("user-data-form.store"), [
             'name' => 'J',
             'email' => 'invalid-email',
         ]);
@@ -41,7 +41,7 @@ class DynamicFormTest extends TestCase
 
     public function test_validation_errors_for_missing_data()
     {
-        $response = $this->post(route("dynamic-form.store"), [
+        $response = $this->post(route("user-data-form.store"), [
             'name' => '',
             'email' => '',
         ]);

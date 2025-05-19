@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DynamicFormRequest;
+use App\Http\Requests\UserDataFormRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class DynamicFormController extends Controller
+class UserDataFormController extends Controller
 {
     /**
      * Display the dynamic form view with pre-defined input fields and action route.
@@ -15,7 +15,7 @@ class DynamicFormController extends Controller
      */
     public function show(): View
     {
-        $action = route('dynamic-form.store');
+        $action = route('user-data-form.store');
         $fields = [
             ["type" => "text", "name" => "name", "required" => true, "label" => "Imię", "class" => "my-name"],
             ["type" => "email", "name" => "email", "required" => true, "label" => "Email", "class" => "my-email"],
@@ -26,12 +26,12 @@ class DynamicFormController extends Controller
     }
 
     /**
-     * Handle the submission of the dynamic form, validate request and return flash response.
+     * Handle the submission of the form, validate request and return flash response.
      *
-     * @param  \App\Http\Requests\DynamicFormRequest $request
+     * @param  \App\Http\Requests\UserDataFormRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(DynamicFormRequest $request): RedirectResponse
+    public function store(UserDataFormRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 

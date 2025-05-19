@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\DTO\FieldDefinition;
+use App\DTO\DynamicFormFieldDefinition;
 use PHPUnit\Framework\TestCase;
 
-class FieldDefinitionTest extends TestCase
+class DynamicFormFieldDefinitionTest extends TestCase
 {
     public function test_creates_field_from_array(): void
     {
@@ -17,7 +17,7 @@ class FieldDefinitionTest extends TestCase
             'class' => 'my-name',
         ];
 
-        $field = FieldDefinition::fromArray($input);
+        $field = DynamicFormFieldDefinition::fromArray($input);
 
         $this->assertEquals('text', $field->type);
         $this->assertEquals('name', $field->name);
