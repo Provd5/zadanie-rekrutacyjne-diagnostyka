@@ -25,7 +25,7 @@ Przejdź do: [http://localhost:8000](http://localhost:8000)
 3. **Uruchom testy w kontenerze:**
 
 ```bash
-docker exec -it app php artisan test
+docker exec -it zadanie-rekrutacyjne-diagnostyka-app php artisan test
 ```
 
 ### Bez użycia Dockera
