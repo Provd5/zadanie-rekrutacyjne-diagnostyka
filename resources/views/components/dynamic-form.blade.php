@@ -1,3 +1,12 @@
+@props([
+    /**
+     * @var FieldDefinition[] $fields
+     * @var string $action
+     */
+    "fields",
+    "action",
+])
+
 <form action="{{ $action }}" method="POST" class="flex flex-col gap-3">
     @csrf
 

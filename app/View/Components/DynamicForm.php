@@ -9,16 +9,25 @@ use Closure;
 
 class DynamicForm extends Component
 {
+    /**
+     * The form action URL.
+     *
+     * @var string
+     */
     public string $action;
 
     /**
+     * The array of form fields.
+     *
      * @var FieldDefinition[]
      */
     public array $fields;
 
     /**
-     * @param string $action
-     * @param FieldDefinition[]|array[] $fields
+     * Create a new component instance.
+     *
+     * @param string $action The URL where the form should be submitted.
+     * @param FieldDefinition[]|array[] $fields Array of field definitions or raw field arrays.
      */
     public function __construct(string $action, array $fields)
     {
@@ -31,6 +40,11 @@ class DynamicForm extends Component
         }, $fields);
     }
 
+    /**
+     * View that represents the component.
+     *
+     * @return View|Closure|string
+     */
     public function render(): View|Closure|string
     {
         return view('components.dynamic-form');
