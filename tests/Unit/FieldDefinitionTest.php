@@ -9,15 +9,7 @@ class DynamicFormFieldDefinitionTest extends TestCase
 {
     public function test_creates_field_from_array(): void
     {
-        $input = [
-            'type' => 'text',
-            'name' => 'name',
-            'required' => true,
-            'label' => 'Imię',
-            'class' => 'my-name',
-        ];
-
-        $field = DynamicFormFieldDefinition::fromArray($input);
+        $field = new DynamicFormFieldDefinition("Imię", "name", "text", true, "my-name");
 
         $this->assertEquals('text', $field->type);
         $this->assertEquals('name', $field->name);

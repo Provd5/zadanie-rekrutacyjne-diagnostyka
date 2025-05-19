@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\DynamicFormFieldDefinition;
 use App\Http\Requests\UserDataFormRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -17,9 +18,9 @@ class UserDataFormController extends Controller
     {
         $action = route('user-data-form.store');
         $fields = [
-            ["type" => "text", "name" => "name", "required" => true, "label" => "Imię", "class" => "my-name"],
-            ["type" => "email", "name" => "email", "required" => true, "label" => "Email", "class" => "my-email"],
-            ["type" => "textarea", "name" => "description", "required" => false, "label" => "Opis", "class" => "my-description"],
+            new DynamicFormFieldDefinition('Imię', 'name', 'text', true, 'my-name'),
+            new DynamicFormFieldDefinition('Email', 'email', 'email', true, 'my-email'),
+            new DynamicFormFieldDefinition('Opis', 'description', 'textarea', false, 'my-description'),
         ];
 
         return view('index', compact('action', 'fields'));

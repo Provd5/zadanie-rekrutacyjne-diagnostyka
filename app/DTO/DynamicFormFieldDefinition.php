@@ -13,22 +13,22 @@ class DynamicFormFieldDefinition
     /**
      * DynamicFormFieldDefinition constructor.
      *
-     * @param string $label    The label for the field.
-     * @param string $type     The input type.
-     * @param string $name     The name attribute.
-     * @param bool   $required Indicates whether the field is required.
-     * @param string $class    Custom classes for the field.
+     * @param string $label    The label for the field (required).
+     * @param string $name     The name attribute (required).
+     * @param string $type     The input type (optional, default "text").
+     * @param bool   $required Indicates whether the field is required (optional, default false).
+     * @param string $class    Custom classes for the field (optional, default empty string).
      */
     public function __construct(
         string $label,
-        string $type,
         string $name,
-        bool $required,
-        string $class
+        string $type = "text",
+        bool $required = false,
+        string $class = ''
     ) {
         $this->label = $label;
-        $this->type = $type;
         $this->name = $name;
+        $this->type = $type;
         $this->required = $required;
         $this->class = $class;
     }
@@ -42,9 +42,9 @@ class DynamicFormFieldDefinition
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['label'] ?? '',
-            $data['type'] ?? 'text',
-            $data['name'] ?? '',
+            $data['label'],
+            $data['name'],
+            $data['type'] ?? "text",
             $data['required'] ?? false,
             $data['class'] ?? ''
         );

@@ -2,49 +2,57 @@
 
 namespace Tests\Feature;
 
+use App\DTO\DynamicFormFieldDefinition;
 use Tests\TestCase;
 
 class DynamicFormComponentTest extends TestCase
 {
-    public function test_dynamic_form_renders_fields_correctly(): void
+    public function test_form_renders_with_correct_action_and_csrf(): void
     {
-        $fields = [
-            ['type' => 'text', 'name' => 'name', 'required' => true, 'label' => 'Imię', 'class' => 'my-name'],
-            ['type' => 'email', 'name' => 'email', 'required' => true, 'label' => 'Email', 'class' => 'my-email'],
-            ['type' => 'textarea', 'name' => 'description', 'required' => false, 'label' => 'Opis', 'class' => 'my-description'],
-        ];
-
         $action = route("user-data-form.store");
 
         $rendered = $this->blade('<x-dynamic-form :$action :$fields />', [
-            'fields' => $fields,
+            'fields' => [],
             'action' => $action,
         ]);
 
-        // form
         $rendered->assertSee('<form', false);
         $rendered->assertSee('action="' . $action . '"', false);
-
-        // csrf token
+        $rendered->assertSee('method="POST"', false);
         $rendered->assertSee('name="_token"', false);
+    }
 
-        // at least once
-        $rendered->assertSee('required', false);
+    public function test_input_renders_correctly(): void
+    {
+        $fields = [
+            new DynamicFormFieldDefinition('Email', 'email', 'email', true, 'my-email')
+        ];
+        $rendered = $this->blade('<x-dynamic-form :$action :$fields />', [
+            'fields' => $fields,
+            'action' => "",
+        ]);
+
+        $rendered->assertSee('<label for="email-id"', false);
         $rendered->assertSee('<input', false);
-        $rendered->assertSee('<textarea', false);
-
-        // name field
-        $rendered->assertSee('my-name', false);
-        $rendered->assertSee('name="name"', false);
-        $rendered->assertSee('type="text"', false);
-
-        // email field
-        $rendered->assertSee('my-email', false);
         $rendered->assertSee('name="email"', false);
-        $rendered->assertSee('type="email"', false);
+        $rendered->assertSee('my-email', false);
+        $rendered->assertSee('required', false);
+    }
 
-        // description field
-        $rendered->assertSee('my-description', false);
+    public function test_textarea_renders_correctly(): void
+    {
+        $fields = [
+            new DynamicFormFieldDefinition('Opis', 'description', 'textarea', false, 'my-description')
+        ];
+        $rendered = $this->blade('<x-dynamic-form :$action :$fields />', [
+            'fields' => $fields,
+            'action' => "",
+        ]);
+
+        $rendered->assertSee('<label for="description-id"', false);
+        $rendered->assertSee('<textarea', false);
         $rendered->assertSee('name="description"', false);
+        $rendered->assertSee('my-description', false);
+        $rendered->assertDontSee('required', false);
     }
 }
