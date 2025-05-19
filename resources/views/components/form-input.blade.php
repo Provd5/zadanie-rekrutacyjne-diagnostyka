@@ -6,8 +6,7 @@
 ])
 
 @php
-    $hasError = $errors->has($field->name);
-
+    $hasError = isset($errors) && $errors->has($field->name);
     $id = $field->name . "-id";
     $commonAttributes = [
         "id" => $id,
@@ -22,7 +21,6 @@
 @endphp
 
 <div class="flex flex-col gap-0.5">
-
     <label for="{{ $id }}">{{ $field->label }}</label>
 
     @if ($field->type === "textarea")
@@ -33,8 +31,7 @@
             {{ $attributes->merge($commonAttributes)->class([$field->class, $commonClass, $errorClass, "h-9 py-1"]) }} />
     @endif
 
-    @error($field->name)
-        <div id="{{ $field->name . "-error" }}" class="text-red-500">{{ $message }}</div>
-    @enderror
-
+    @if ($hasError)
+        <div id="{{ $field->name . "-error" }}" class="text-red-500">{{ $errors->first($field->name) }}</div>
+    @endif
 </div>
