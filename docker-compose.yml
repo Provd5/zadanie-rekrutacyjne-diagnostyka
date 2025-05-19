@@ -1,0 +1,22 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: laravel-app
+        container_name: zadanie-rekrutacyjne-diagnostyka-app
+        working_dir: /var/www
+        volumes:
+            - .:/var/www
+            - /var/www/vendor
+            - /var/www/node_modules
+        ports:
+            - "8000:8000"
+            - "5173:5173"
+        command: [
+                "bash",
+                "-c",
+                "composer install &&
+                npm install &&
+                composer run dev",
+            ]
