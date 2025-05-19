@@ -7,4 +7,6 @@ Route::get('/', function () {
     return view('index');
 })->name("index");
 
-Route::post('/dynamic-form', [DynamicFormController::class, 'store'])->name("api.dynamic-form.store");
+Route::group(["prefix" => 'dynamic-form', "as" => "dynamic-form."], function () {
+    Route::post('', [DynamicFormController::class, 'store'])->name("store");
+});

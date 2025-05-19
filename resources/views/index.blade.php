@@ -1,5 +1,5 @@
 @php
-    $action = route("api.dynamic-form.store");
+    $action = route("dynamic-form.store");
     $fields = [
         ["type" => "text", "name" => "name", "required" => true, "label" => "Imię", "class" => "my-name"],
         ["type" => "email", "name" => "email", "required" => true, "label" => "Email", "class" => "my-email"],
